@@ -1,0 +1,66 @@
+1. Use Random Function (( RANDOM )) to get Single Digit
+Ans:            $ echo $(( $RANDOM % 10 ))
+
+2. Use Random to get Dice Number between 1 to 6
+Ans:           $ nano getDiceNumber.sh
+	 #!/bin/bash -x
+	 dicenumber=$((RANDOM%6) )
+	 echo "dicenumber : $dicenumber"
+	
+3. Add two Random Dice Number and Print the Result
+Ans:           #!/bin/bash -x
+	dicenumber1=$(((RANDOM%6)+1))
+	echo "firstnumber = $dicenumber1"
+	dicenumber2=$(((Random%6 )+1))
+	echo "secondnumber = $dicenumber2"
+	addition=$(($firstnumber+$secondnumber))
+	echo "addition=$addition"
+
+4. Write a program that reads 5 Random 2 Digit values , then find their
+sum and the average
+Ans :          $ nano TwoDigitAverage.sh
+	#!/bin/bash
+	sum=0
+	for((i=1;i<=5;i++))
+	do
+        		twodigitnum=$(((RANDOM%89) + 10))
+        		echo $twodigitnum
+       		 sum=$(($sum+$twodigitnum))
+	done
+	echo "sum =$sum"
+	avg=$(($sum/5))
+	echo "average=$avg"
+
+
+
+5. Unit Conversion
+a. 1ft = 12 in then 42 in = ? ft
+b. Rectangular Plot of 60 feet x 40 feet in meters
+c. Calculate area of 25 such plots in acres
+
+
+a.Ans   :    $ nano UnitConversion.sh
+	#!/bin/bash -x
+	read inchnum
+	for n in 'inchnum'
+	do
+       		echo "$n"
+       	 	feetofinches=$((n/12))
+        		echo "feet of $n = $feetofinches"
+	done
+
+b.Ans :      $ nano UnitConversion1.sh
+	#!/bin/bash -x
+	read l
+	read b
+ 	       	 MeterArea=`expr $((expr $l * f.read(0.3048))) * $((expr $b * f.read(0.3048)))`
+ 		echo $MeterArea
+
+c.Ans :      $ nano UnitConversion2.sh 
+	#!/bin/bash -x
+	read plot
+	                   AreaInMeters=$(plot*50)
+       		AreaInAcres=$(($AreaInMeters* f.read(0.000247105)))
+        		echo $AreaInAcres
+
+
