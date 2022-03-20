@@ -1,0 +1,112 @@
+
+1. Help user find degF or degC based on their Conversion Selection. Use
+Case Statement and ensure that the inputs are within the Freezing Point (
+0 °C / 32 °F ) and the Boiling Point of Water ( 100 °C / 212 °F )
+a. degF = (degC * 9/5) + 32
+b. degC = (degF – 32) * 5/9
+Ans :	$ nano ConvertTemperature.sh
+	#!/bin/bash -x
+	read -p "select degF  or degC " option
+	case "$option" in
+       		degF) read -p "enter tempearature in celcius between 0 and 100 : " celciustemp
+                			if [ $celciustemp -ge 0 && $celciustemp -le 100 ];
+                			then
+                        			awk "BEGIN {print (($T*(9/5))+32)}"
+                			else
+                        			echo "celciustemperature is out of range"
+                			fi
+                       			 ;;
+        		degC) read -p "enter temperature between 32-212 : " farentemp
+                			if [ $farentemp -ge 32 && $farentemp -le 212 ];
+                			then
+                        			awk "BEGIN {print (($F-32)*(5/9))}"
+                			else
+                        			echo "farentemp is out of range"
+                			fi
+                        			;;
+        		*) echo "wrong selection"
+	esac
+
+
+------------------------- * ------------------------------- * ---------------------------- * -------------------------- 
+2. Write a function to check if the two numbers are Palindromes
+Ans : 	$ nano Palindrome.sh
+	#!/bin/bash -x
+	read -p "enter first number : " num1
+	read -p "enter second number : " num2
+	length=${#num1}
+	i=$((length-1))
+	function chekpal()
+	{
+        		while [ $i -ge 0 ]
+        		do
+                			rev1=$rev1${num1:$i:1}
+                		i=$((i-1))
+        		done
+
+        		if [ rev1 == num2 ]
+        		then
+                			echo "$num1 and $num2 are the palindromes"
+       		else
+               			echo "not palindromes"
+        		fi
+	}
+	chekpal
+
+ ------------------------- * ------------------------------- * ---------------------------- * -------------------------- 
+3. Take a number from user and check if the number is a Prime then show
+that its palindrome is also prime
+a. Write function check if number is Prime
+b. Write function to get the Palindrome.
+c. Check if the Palindrome number is also prime
+Ans : 	$ nano PrimePalindrome.sh
+	#!/bin/bash -x
+	read -p "enter number to chek it is a prime  : " num
+	flag=0
+	function chekprime()
+	{
+		number=$1
+		for((i=2; i<=number/2; i++))
+		do
+        			if [ $((number%i)) -eq 0 ]
+        			then
+                				flag=1
+        			fi
+        			((i++))
+		done
+
+		if [ $flag -eq 1 ]
+		then
+        			echo "The $number is not Prime"
+		else
+        			echo "The $number is Prime"
+        			isPrime=1
+		fi
+
+
+if [ $isprime -eq 1 ]
+then
+        getpalindrome $number
+fi
+
+function getpalindrome()
+{
+        palindrome=$1
+        length=${#palindrome}
+        i=$((length-1))
+        while [ $i -ge 0 ]
+        do
+                reverse=$reverse${palindrome:$i:1}
+                i=$((i-1))
+        done
+
+        if [ $reverse -eq $palindrome ]
+        then
+                echo "number is palindrome"
+                chekprime $palindrome
+        else
+                echo "number is not palindrome"
+        fi
+}
+}
+chekprime $num
