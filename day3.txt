@@ -1,0 +1,102 @@
+1.MOVE FILES FROM ONE FOLDER TO RESPECTIVE FOLDER
+ans:           $ mkdir day3
+	$ cd day3
+	$ touch abc.txt def.txt ghi.txt jkl.txt
+	$ nano movefile.sh
+		#!/bin/bash -x
+		for file in `ls *.txt`
+		do
+			echo $file
+			respectivefolder=`echo $file | awk -F. '{print $1}'`
+			mkdir $respective folder
+			mv $file $respectivefolder
+		done
+	
+
+2.APPEND CURRENT DATE TO ALL LOG FILES NAME WHICH HAS EXTENSION .LOG.1 FROM A FOLDER
+Ans:          $ touch abc.log.1  def.log.1  ghi.log.1  jkl.log.1 mno.log.1 
+	$ nano appenddate.sh
+		#!/bin/bash -x
+		for file in `ls *.log.1`
+		do
+			echo $file
+			basename=`echo $file | awk -F. '{print $1}'`
+			currentdate=`echo $(date +%d%m%y)`
+			echo $currentdate
+			newname=$basename$currentdate".log.1"
+			echo newname	
+		done
+	$ ./appenddate.sh
+
+3.ARCHIVE THE FILES FROM /VAR/LOG WHICH HAVE MODIFIED 7 DAYS AGO AND MOVE IT TO YOUR BACKUP FOLDER
+Ans:          $ find  /linux-content/var/log  -mtime  -7  -ls
+
+
+
+4.CHEAK IF A FOLDER EXISTS OR NOT. IF ITS NOT PRESENT, CREATE IT
+Ans:	#!/bin/bash -x
+	F2="TerminalCommands/day3/"
+	if [ -d "$F2" ]
+	then
+   	        echo "error"
+	else
+	        mkdir F2 && echo "directory has been created"
+	fi
+
+
+
+5.EXECUTE COMMAND "hello" AND "ls" AND CHEAK ITS EXECUTION STATUS AND PRINT WHETHER COMMAND EXECUTED SUCCESSFUL OR NOT
+Ans :          $hello
+	$echo $?
+	$ls
+	$echo $?
+
+
+6.SET ENVIRONMENT usersecret="dH34xJaa23" IF ITS ALREADY NOT SET
+Ans:           $ env | grep usersecret
+	$ export useresecret="dH34xJaa23"
+	$ env | grep usersecret
+
+
+7.FIND A WORD "syestemd" FROM ALL LOG FILES IN THE FOLDER /var/log AND PRINT NUMBER OF OCCURENCE MORE THAN 0 AGAINST EACH FILE
+Ans:          $ cat access.log | grep systemd -wc 
+	
+
+
+8.CREATE PROCESS LIST TABLE DISPLAYS PROCESS ID, PARENT PROCESS ID, COMMAND NAME.
+Ans : ps | awk '{print $1,$2,$8}'
+
+
+9.PRINT LAST 4 FREQUENTLY ACCESS URLS COUNT IN SORTED ORDER FROM /var/log/httpd/acces.log
+Ans :      $ 	cat access.log | awk '{print $11}' | sort | uniq -c |sort -nr| head -4
+
+
+10.PRINT LIST OF LAST FREQUENTLY ACCES UNIQUE URLS AT PARTICULAR HOURS FROM /var/log/httpd/acces.log
+Ans:       $ cat access.log | awk '{print $4  $11}' | sort | uniq -c | sort -nr |head -4
+
+
+
+11.PRINT LIST OF WEB RESPONSE CODE COUNT IN THE UNIQUE SORTED ORDER AT SPECIFIC HOURS
+
+
+12.PRINT LIST OF LAST 10 UNIQUE SORTED CLIENT IP FROM /var/log/httpd/acces.log
+Ans: 	$ cat access.log | awk '{print $16}' | sort | uniq -c| head -10
+
+
+13.DATA ANALYSIS AND MANUPULATION(awk)
+Ans:          i) $ cat data.csv | awk ' $4 > 10000 {print $2,  $7}'
+
+	
+	ii) $ cat data.csv | grep CAPTAIN | awk '{sum+=$7} END {print sum/NR}'
+
+	iii) $ cat data.csv | awk '7000<$5  &&  $5<10000  {print $3,$5}'
+
+	iv) $ cat data.csv | awk '{sum+=$4} END {print sum/(NR-1)}'
+
+
+14.FIND DIFFERENCES BETWEEN ORIGINAL FILKE AND UPDATED FILE.
+APPLY CHANGES TO ORIGINAL FILE
+Ans:           $ mkdir original updated
+	$ cp original-file.sh original/
+	$ cp updated-file.sh updated/
+	$ diff original updated
