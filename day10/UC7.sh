@@ -17,6 +17,7 @@ dictionary[2]="$op3"
 op4=$((a%b+c))
 dictionary[3]="$op4"
 
+declare -a array
 i=0
 for value in "${dictionary[@]}"
 do
